@@ -117,9 +117,9 @@ class Updater {
 		}
 
 		$data = $this->scanner->scan($path, Scanner::SCAN_SHALLOW, -1, false);
+		$sizeDifference = $data['size'] - $data['oldSize'];
 		$this->correctParentStorageMtime($path);
-		$this->cache->correctFolderSize($path, $data);
-		$this->propagator->propagateChange($path, $time);
+		$this->propagator->propagateChange($path, $time, $sizeDifference);
 	}
 
 	/**
